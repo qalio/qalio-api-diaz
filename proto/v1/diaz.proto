@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package diaz.v1;
+
+import "proto/v1/common/utils.proto";
+
+message PricingRequest {
+  string ride_id = 1;
+  double distance = 2; // in kilometers
+  double duration = 3; // in minutes
+}
+
+message PricingResponse {
+  double fare = 1;
+  string currency = 2;
+}
+
+service DiazService {
+  rpc CalculateFare(PricingRequest) returns (PricingResponse);
+  rpc ApplyDynamicPricing(PricingRequest) returns (PricingResponse);
+}
